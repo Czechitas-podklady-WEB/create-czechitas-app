@@ -1,6 +1,6 @@
 # czechitas-web-app
 
-Script to create a structure for web application based on Webpack and vanilla JavaScript.
+A ccript to create the structure for a web application based on Webpack and vanilla JavaScript.
 
 To install:
 

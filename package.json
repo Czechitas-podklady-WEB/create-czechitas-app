@@ -1,12 +1,12 @@
 {
-  "name": "czechitas-web-app",
+  "name": "create-czechitas-app",
   "version": "1.0.0",
   "description": "Czechitas web application starter",
   "main": "index.js",
   "author": "Martin Podloucký",
   "license": "ISC",
   "bin": {
-    "czechitas-web-app": "./index.js"
+    "create-czechitas-app": "./index.js"
   },
   "dependencies": {
     "fs-extra": "^9.0.1"

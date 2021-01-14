@@ -1,4 +1,4 @@
-# czechitas-web-app
+# create-czechitas-app
 
 A script to create the structure of a web application based on Webpack and vanilla JavaScript.
 
@@ -11,7 +11,7 @@ npm install -g git+https://github.com/Czechitas-podklady-WEB/czechitas-web-app.g
 To create and run a fresh new app
 
 ```
-czechitas-web-app my-app
+create-czechitas-app my-app
 cd my-app
 npm start
 ```

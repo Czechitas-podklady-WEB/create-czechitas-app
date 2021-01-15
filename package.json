@@ -1,6 +1,6 @@
 {
   "name": "create-czechitas-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Czechitas web application starter",
   "main": "index.js",
   "author": "Martin Podloucký",

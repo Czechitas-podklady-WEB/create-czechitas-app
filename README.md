@@ -1,6 +1,6 @@
 # create-czechitas-app
 
-A script to create the structure of a web application based on Webpack and vanilla JavaScript.
+A script to create the structure of a JavaScript web application based on Webpack.
 
 To create and run a fresh new React app 
 

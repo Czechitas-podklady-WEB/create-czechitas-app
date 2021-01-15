@@ -19,8 +19,8 @@ function createApp(appName, useReact) {
   fs.mkdirSync(root);
 
   const projectTree = useReact ? 'react-tree' : 'vanilla-tree';
-  fs.copySync(path.resolve(__dirname, projectTree), root);
   fs.copySync(path.resolve(__dirname, 'common-files'), root);
+  fs.copySync(path.resolve(__dirname, projectTree), root);
 
   const packageJson = fs.readJsonSync(path.resolve(root, 'package.json'));
   packageJson.name = appName;

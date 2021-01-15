@@ -46,7 +46,7 @@ const argv = yargs(process.argv.slice(2))
           type: 'string',
         })
         .option('react', {
-          desc: 'Create a React appliaction',
+          desc: 'Create a React application',
           type: 'boolean',
           default: true,
         }),

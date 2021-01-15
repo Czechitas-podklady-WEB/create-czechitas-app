@@ -4,7 +4,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const spawnSync = require('child_process').spawnSync;
+const spawnSync = require('cross-spawn').sync;
 
 const projectName = process.argv[2];
 const root = path.resolve(projectName);

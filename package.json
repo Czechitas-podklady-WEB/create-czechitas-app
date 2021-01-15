@@ -13,6 +13,7 @@
     "url": "https://github.com/Czechitas-podklady-WEB/create-czechitas-app"
   },
   "dependencies": {
+    "cross-spawn": "^7.0.3",
     "fs-extra": "^9.0.1"
   }
 }

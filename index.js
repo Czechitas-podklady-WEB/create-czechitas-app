@@ -2,11 +2,37 @@
 
 'use strict';
 
-const fs = require('fs-extra');
+const fs = require('fs');
 const path = require('path');
+const walkSync = require('walkdir').sync;
 const spawnSync = require('cross-spawn').sync;
 const yargs = require('yargs/yargs');
 const chalk = require('chalk');
+
+// Copies the content of a given directory to the destination directory
+// Renames file '_.gitignore' to '.gitignore'
+function copyDir(dir, dest) {
+  return walkSync(dir, (srcPath, stat) => {
+    const srcFileName = path.basename(srcPath);
+    const destFileName =
+      srcFileName === '_.gitignore' ? '.gitignore' : srcFileName;
+
+    const srcFileParent = path.dirname(srcPath);
+
+    const destPath = path.resolve(
+      dest,
+      path.relative(dir, srcFileParent),
+      destFileName,
+    );
+
+    if (stat.isDirectory()) {
+      fs.mkdirSync(destPath);
+      return;
+    }
+
+    fs.copyFileSync(srcPath, destPath);
+  });
+}
 
 function createApp(appName, useReact) {
   if (useReact) {
@@ -18,15 +44,19 @@ function createApp(appName, useReact) {
   const root = path.resolve(appName);
   fs.mkdirSync(root);
 
-  const projectTree = useReact ? 'react-tree' : 'vanilla-tree';
-  fs.copySync(path.resolve(__dirname, 'packages', 'common-files'), root);
-  fs.copySync(path.resolve(__dirname, 'packages', projectTree), root);
+  const treeName = useReact ? 'react-tree' : 'vanilla-tree';
 
-  const packageJson = fs.readJsonSync(path.resolve(root, 'package.json'));
+  copyDir(path.resolve(__dirname, 'project-trees', 'common'), root);
+  copyDir(path.resolve(__dirname, 'project-trees', treeName), root);
+
+  const packageJson = JSON.parse(
+    fs.readFileSync(path.resolve(root, 'package.json')),
+  );
   packageJson.name = appName;
-  fs.writeJsonSync(path.resolve(root, 'package.json'), packageJson, {
-    spaces: 2,
-  });
+  fs.writeFileSync(
+    path.resolve(root, 'package.json'),
+    JSON.stringify(packageJson, { spaces: 2 }),
+  );
 
   console.log('Installing NPM dependencies:');
 

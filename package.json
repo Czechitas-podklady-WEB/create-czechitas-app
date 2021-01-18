@@ -8,9 +8,6 @@
   "bin": {
     "create-czechitas-app": "./index.js"
   },
-  "scripts": {
-    "postinstall": "node -e \"const fs = require('fs-extra'); const path = require('path'); fs.moveSync(path.resolve(__dirname, 'packages', 'common-files', '.npmignore'), path.resolve(__dirname, 'packages', 'common-files', '.gitignore'));\" # Rename .npmignore in common-files back to original .gitignore as a workaround to somewhat weird npm install behaviour renaming the .gitignore."
-  },
   "preferGlobal": true,
   "repository": {
     "type": "git",
@@ -19,7 +16,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
-    "fs-extra": "^9.0.1",
+    "walkdir": "^0.4.1",
     "yargs": "^16.2.0"
   }
 }

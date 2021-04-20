@@ -29,8 +29,6 @@ const argv = yargs(process.argv.slice(2))
 
 (async () => {
   try {
-    console.log(argv.app_name);
-    console.log(argv.kit_name);
     const rootDir = path.resolve('.');
     const kitPlan = await fetchKitPlan(argv.kit_name, REPO_URL);
     const { appRoot } = initAppFolder(rootDir, argv.app_name);

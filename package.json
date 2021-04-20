@@ -16,7 +16,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
-    "walkdir": "^0.4.1",
+    "whipapp-core": "0.0.4",
     "yargs": "^16.2.0"
   }
 }

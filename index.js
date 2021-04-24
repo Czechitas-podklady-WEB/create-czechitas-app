@@ -12,7 +12,7 @@ const REPO_URL = 'https://api.github.com/repos/podlomar/czechitas-starter-kits';
 
 const argv = yargs(process.argv.slice(2))
   .command({
-    command: '$0 <app_name> <kit_name>',
+    command: '$0 <app_name> [kit_name]',
     desc: 'Create a starter web application',
     builder: (yargs) =>
       yargs

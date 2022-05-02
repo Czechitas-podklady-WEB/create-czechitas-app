@@ -8,7 +8,7 @@ const spawnSync = require('cross-spawn').sync;
 const yargs = require('yargs/yargs');
 const { fetchKitPlan, initAppFolder, generateApp } = require('whipapp-core');
 
-const REPO_URL = 'https://api.github.com/repos/podlomar/czechitas-starter-kits';
+const SERVER_URL = 'https://podlomar.github.io/czechitas-starter-kits';
 
 const argv = yargs(process.argv.slice(2))
   .command({
@@ -30,12 +30,23 @@ const argv = yargs(process.argv.slice(2))
 (async () => {
   try {
     const rootDir = path.resolve('.');
-    const kitPlan = await fetchKitPlan(argv.kit_name, REPO_URL);
-    const { appRoot } = initAppFolder(rootDir, argv.app_name);
-    await generateApp(argv.app_name, kitPlan);
+    const kitPlan = await fetchKitPlan(argv.kit_name, SERVER_URL);
+    if (kitPlan.status === 'error') {
+      console.error(chalk.redBright('ERROR:', kitPlan.message));
+      return;
+    }
+
+    const result = initAppFolder(rootDir, argv.app_name);
+    if (result.status === 'error') {
+      console.error(chalk.redBright('ERROR:', result.message));
+      return;
+    }
+
+    console.log(result);
+    await generateApp(result.appRoot, kitPlan);
   
     console.log('Installing NPM dependencies:');
-    spawnSync('npm', ['install'], { cwd: appRoot, stdio: 'inherit' });
+    spawnSync('npm', ['install'], { cwd: result.appRoot, stdio: 'inherit' });
 
     console.log(chalk.green(`Project '${argv.app_name}' created successfully.`));
   } catch (error) {

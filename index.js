@@ -8,29 +8,34 @@ const spawnSync = require('cross-spawn').sync;
 const yargs = require('yargs/yargs');
 const { fetchKitPlan, initAppFolder, generateApp } = require('whipapp-core');
 
-const SERVER_URL = 'https://podlomar.github.io/czechitas-starter-kits';
+const DEFAULT_SERVER_URL = 'https://podlomar.github.io/czechitas-starter-kits';
 
 const argv = yargs(process.argv.slice(2))
   .command({
     command: '$0 <app_name> [kit_name]',
     desc: 'Create a starter web application',
-    builder: (yargs) =>
-      yargs
-        .positional('app_name', {
-          describe: 'The name of your application',
-          type: 'string',
-        })
-        .positional('kit_name', {
-          desc: 'Starter kit template',
-          type: 'string',
-          default: 'react',
-        }),
-    }).help().argv;
+    builder: (yargs) => yargs
+      .positional('app_name', {
+        describe: 'The name of your application',
+        type: 'string',
+      })
+      .positional('kit_name', {
+        desc: 'Starter kit template',
+        type: 'string',
+        default: 'react',
+      })
+      .option('s', {
+        alias: 'server',
+        default: DEFAULT_SERVER_URL,
+        describe: 'URL from where to fetch the kit files',
+        type: 'string'
+    })
+  }).help().argv;
 
 (async () => {
   try {
     const rootDir = path.resolve('.');
-    const kitPlan = await fetchKitPlan(argv.kit_name, SERVER_URL);
+    const kitPlan = await fetchKitPlan(argv.kit_name, argv.server);
     if (kitPlan.status === 'error') {
       console.error(chalk.redBright('ERROR:', kitPlan.message));
       return;

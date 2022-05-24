@@ -47,13 +47,12 @@ const argv = yargs(process.argv.slice(2))
       return;
     }
 
-    console.log(result);
     await generateApp(result.appRoot, kitPlan);
   
-    console.log('Installing NPM dependencies:');
+    console.info('Installing NPM dependencies:');
     spawnSync('npm', ['install'], { cwd: result.appRoot, stdio: 'inherit' });
 
-    console.log(chalk.green(`Project '${argv.app_name}' created successfully.`));
+    console.info(chalk.green(`Project '${argv.app_name}' created successfully.`));
   } catch (error) {
     console.error(chalk.redBright(`ERROR: ${error.message}`));
   }

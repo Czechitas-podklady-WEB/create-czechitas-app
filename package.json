@@ -14,9 +14,6 @@
     "url": "https://github.com/Czechitas-podklady-WEB/create-czechitas-app"
   },
   "dependencies": {
-    "chalk": "^4.1.0",
-    "cross-spawn": "^7.0.3",
-    "whipapp-core": "0.0.6",
-    "yargs": "^16.2.0"
+    "chalk": "^4.1.0"
   }
 }
